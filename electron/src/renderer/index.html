@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Markdown Bible Generator</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Bible Markdown Generator</h1>
+
+    <div class="section">
+      <label for="translation-select">Translation:</label>
+      <select id="translation-select" disabled>
+        <option value="">Loading translations...</option>
+      </select>
+      <button id="fetch-btn">Fetch Translations</button>
+    </div>
+
+    <div class="section">
+      <label>Books:</label>
+      <div class="book-grid" id="book-grid">
+        <div class="book-item">
+          <input type="checkbox" id="book-1" value="1" checked>
+          <label for="book-1">Genesis</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-2" value="2" checked>
+          <label for="book-2">Exodus</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-3" value="3" checked>
+          <label for="book-3">Leviticus</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-4" value="4" checked>
+          <label for="book-4">Numbers</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-5" value="5" checked>
+          <label for="book-5">Deuteronomy</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-6" value="6" checked>
+          <label for="book-6">Joshua</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-7" value="7" checked>
+          <label for="book-7">Judges</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-8" value="8" checked>
+          <label for="book-8">Ruth</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-9" value="9" checked>
+          <label for="book-9">1 Samuel</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-10" value="10" checked>
+          <label for="book-10">2 Samuel</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-11" value="11" checked>
+          <label for="book-11">1 Kings</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-12" value="12" checked>
+          <label for="book-12">2 Kings</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-13" value="13" checked>
+          <label for="book-13">1 Chronicles</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-14" value="14" checked>
+          <label for="book-14">2 Chronicles</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-15" value="15" checked>
+          <label for="book-15">Ezra</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-16" value="16" checked>
+          <label for="book-16">Nehemiah</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-17" value="17" checked>
+          <label for="book-17">Esther</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-18" value="18" checked>
+          <label for="book-18">Job</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-19" value="19" checked>
+          <label for="book-19">Psalms</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-20" value="20" checked>
+          <label for="book-20">Proverbs</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-21" value="21" checked>
+          <label for="book-21">Ecclesiastes</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-22" value="22" checked>
+          <label for="book-22">Song of Solomon</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-23" value="23" checked>
+          <label for="book-23">Isaiah</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-24" value="24" checked>
+          <label for="book-24">Jeremiah</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-25" value="25" checked>
+          <label for="book-25">Lamentations</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-26" value="26" checked>
+          <label for="book-26">Ezekiel</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-27" value="27" checked>
+          <label for="book-27">Daniel</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-28" value="28" checked>
+          <label for="book-28">Hosea</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-29" value="29" checked>
+          <label for="book-29">Joel</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-30" value="30" checked>
+          <label for="book-30">Amos</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-31" value="31" checked>
+          <label for="book-31">Obadiah</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-32" value="32" checked>
+          <label for="book-32">Jonah</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-33" value="33" checked>
+          <label for="book-33">Micah</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-34" value="34" checked>
+          <label for="book-34">Nahum</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-35" value="35" checked>
+          <label for="book-35">Habakkuk</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-36" value="36" checked>
+          <label for="book-36">Zephaniah</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-37" value="37" checked>
+          <label for="book-37">Haggai</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-38" value="38" checked>
+          <label for="book-38">Zechariah</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-39" value="39" checked>
+          <label for="book-39">Malachi</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-40" value="40" checked>
+          <label for="book-40">Matthew</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-41" value="41" checked>
+          <label for="book-41">Mark</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-42" value="42" checked>
+          <label for="book-42">Luke</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-43" value="43" checked>
+          <label for="book-43">John</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-44" value="44" checked>
+          <label for="book-44">Acts</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-45" value="45" checked>
+          <label for="book-45">Romans</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-46" value="46" checked>
+          <label for="book-46">1 Corinthians</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-47" value="47" checked>
+          <label for="book-47">2 Corinthians</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-48" value="48" checked>
+          <label for="book-48">Galatians</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-49" value="49" checked>
+          <label for="book-49">Ephesians</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-50" value="50" checked>
+          <label for="book-50">Philippians</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-51" value="51" checked>
+          <label for="book-51">Colossians</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-52" value="52" checked>
+          <label for="book-52">1 Thessalonians</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-53" value="53" checked>
+          <label for="book-53">2 Thessalonians</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-54" value="54" checked>
+          <label for="book-54">1 Timothy</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-55" value="55" checked>
+          <label for="book-55">2 Timothy</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-56" value="56" checked>
+          <label for="book-56">Titus</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-57" value="57" checked>
+          <label for="book-57">Philemon</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-58" value="58" checked>
+          <label for="book-58">Hebrews</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-59" value="59" checked>
+          <label for="book-59">James</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-60" value="60" checked>
+          <label for="book-60">1 Peter</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-61" value="61" checked>
+          <label for="book-61">2 Peter</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-62" value="62" checked>
+          <label for="book-62">1 John</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-63" value="63" checked>
+          <label for="book-63">2 John</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-64" value="64" checked>
+          <label for="book-64">3 John</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-65" value="65" checked>
+          <label for="book-65">Jude</label>
+        </div>
+        <div class="book-item">
+          <input type="checkbox" id="book-66" value="66" checked>
+          <label for="book-66">Revelation</label>
+        </div>
+      </div>
+    </div>
+
+    <div class="section">
+      <label for="format-select">Output Format:</label>
+      <select id="format-select">
+        <option value="single">Single File (bible.md)</option>
+        <option value="book">Per Book (01_Genesis.md)</option>
+        <option value="chapter">Per Chapter (01_Genesis/01_Genesis_01.md)</option>
+        <option value="verse">Per Verse (01_Genesis/01/01_Genesis_01_01.md)</option>
+      </select>
+    </div>
+
+    <button id="download-btn" disabled>Download Bible</button>
+
+    <div class="progress-section" id="progress-section" style="display: none;">
+      <div class="progress-bar">
+        <div class="progress-fill" id="progress-fill"></div>
+      </div>
+      <div class="progress-text" id="progress-text">0%</div>
+    </div>
+
+    <div class="result-section" id="result-section" style="display: none;">
+      <h3>Result</h3>
+      <div id="result-content"></div>
+      <button id="save-btn">Save to Folder</button>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

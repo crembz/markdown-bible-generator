@@ -1,0 +1,7 @@
+appId: com.markdownbiblegenerator.app
+productName: Markdown Bible Generator
+win:
+  target: nsis
+files:
+  - dist/main/**/*
+  - src/renderer/**/*

@@ -1,0 +1,45 @@
+# Dependencies
+node_modules/
+electron/node_modules/
+
+# Build output
+dist/
+electron/dist/
+out/
+
+# Electron builder artifacts
+*.tgz
+*.exe
+*.msi
+*.dmg
+*.deb
+*.rpm
+*.AppImage
+*.snap
+*.tar.gz
+
+# Runtime / compiled
+*.dll
+*.so
+*.o
+*.js.map
+.tsbuildinfo
+
+# Package lock (optional - keep for reproducibility)
+# package-lock.json
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE / config
+.vscode/
+.idea/
+*.swp
+*.swo
+.opencode/
+AGENTS.md
+
+# Logs
+*.log
