@@ -6,25 +6,37 @@ Desktop app that downloads Bible translations from [bolls.life](https://bolls.li
 ![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white)
 ![Node.js](https://img.shields.io/badge/Node.js-339933?style=for-the-badge&logo=nodedotjs&logoColor=white)
 
+## Download
+
+Get the pre-built installer from [GitHub Releases](https://github.com/crembz/markdown-bible-generator/releases).
+
+## Prerequisites
+
+- [Node.js 18+](https://nodejs.org/)
+- npm (comes with Node.js)
+
 ## Quick Start
 
 ```bash
 cd electron
 npm install
-npx tsc
-node scripts/copy-renderer.js
-npx electron .
+npm run dev
 ```
+
+`npm run dev` = `tsc` + `copy-renderer` + `electron .`
 
 ## Build Executable
 
 ```bash
 cd electron
 npm install
-npx tsc
-node scripts/copy-renderer.js
 npm run package
 ```
+
+Outputs:
+- **Windows**: `dist/Markdown Bible Generator Setup {version}.exe` (NSIS)
+- **macOS**: `dist/Markdown Bible Generator {version}.dmg`
+- **Linux**: `dist/Markdown Bible Generator {version}.AppImage`
 
 Outputs:
 - **Windows**: `dist/Markdown Bible Generator Setup 1.0.0.exe` (NSIS)
