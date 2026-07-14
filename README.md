@@ -37,14 +37,14 @@ electron/
       main.ts              → Electron app entry, BrowserWindow setup, IPC registration
       api/
         client.ts            → BollsClient (https.get, fetches languages.json)
-        downloader.ts        → Downloader (fetches translation JSON, derives book list)
+        downloader.ts        → Downloader (fetches translation JSON)
       processor.ts           → html_to_markdown() (cheerio strips tags, decodes entities)
       formatter.ts           → format_bible() (single/book/chapter/verse output)
       file-writer.ts         → write_output() (writes files to disk via fs/promises)
       books.ts               → BOOK_NAMES dict (hardcoded 1-88, ported from Python)
       preload.ts             → contextBridge for renderer IPC
     renderer/
-      index.html             → UI layout (dropdowns, checkboxes, progress, output)
+      index.html             → UI layout (dropdowns, progress, output)
       styles.css             → Styling (dark theme)
       script.js              → IPC handlers, state management, UI logic
   package.json
