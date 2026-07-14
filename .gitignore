@@ -1,6 +1,5 @@
 # Dependencies
 node_modules/
-electron/node_modules/
 
 # Build output
 dist/
@@ -25,6 +24,13 @@ out/
 *.js.map
 .tsbuildinfo
 
+# Environment / secrets
+.env
+.env.local
+.env.*.local
+*.pem
+*.key
+
 # Package lock (optional - keep for reproducibility)
 # package-lock.json
 
@@ -42,3 +48,8 @@ desktop.ini
 
 # Logs
 *.log
+
+# Temp / scratch
+*.tmp
+*.bak
+*~
