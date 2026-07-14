@@ -68,7 +68,7 @@ electron/
 
 | Format | Example |
 |--------|---------|
-| single | `bible.md` |
+| single | `{translation}.md` (e.g., `kjv.md`) |
 | book | `Genesis.md` |
 | chapter | `Genesis/01_Genesis.md` |
 | verse | `Genesis/01/01_Genesis_1_1.md` |
@@ -82,6 +82,7 @@ electron/
 - Book names are **hardcoded** in `src/main/books.ts`, NOT from the API.
 - Book IDs: 1-66 = Protestant canon, 67-88 = apocrypha/deuterocanonical (KJV has 89 books, ESV/NKJV have 66).
 - All translations are downloaded in full (no per-book filtering).
+- Single file output uses the translation slug as the filename (e.g., `kjv.md`, `esv.md`).
 
 ## Stack
 
