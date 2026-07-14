@@ -6,18 +6,21 @@
 cd electron
 npm install
 npx tsc
-node -e "const fs=require('fs'),path=require('path');fs.readdirSync('src/renderer').forEach(f=>fs.copyFileSync('src/renderer/'+f,'dist/renderer/'+f))"
+node scripts/copy-renderer.js
 npx electron .
 ```
 
-Packaging: `npm run package` → `dist/Markdown Bible Generator Setup 1.0.0.exe`
+Packaging: `npm run package` — outputs platform-specific binaries:
+- **Windows**: `dist/Markdown Bible Generator Setup 1.0.0.exe` (NSIS)
+- **macOS**: `dist/Markdown Bible Generator 1.0.0.dmg`
+- **Linux**: `dist/Markdown Bible Generator 1.0.0.AppImage`
 
 ## Gotchas
 
 - **tsconfig**: `skipDefaultLibCheck: true` and `types: []` are required — omitting them causes `http-cache-semantics`/`ms` type errors.
 - **Electron binary**: On Windows, `npm install` may not extract the Electron binary. If `electron.exe` is missing from `node_modules/electron/dist/`, manually download and extract from the Electron cache or run `node node_modules/electron/install.js`.
-- **Renderer files** are plain HTML/CSS/JS — copied to `dist/renderer/` at build time, not bundled.
-- **Windows only** — electron-builder targets NSIS (`win.target: nsis`).
+- **Renderer files** are plain HTML/CSS/JS — copied to `dist/renderer/` via `scripts/copy-renderer.js`, not bundled.
+- **electron-builder config** is in both `package.json` and `electron-builder.yml` — keep them in sync.
 
 ## Architecture
 

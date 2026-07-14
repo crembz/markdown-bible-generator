@@ -2,19 +2,26 @@
   "name": "markdown-bible-generator",
   "version": "1.0.0",
   "description": "Desktop app that downloads Bible translations from bolls.life and generates markdown output",
+  "author": "crembz",
   "main": "dist/main/main.js",
   "scripts": {
     "build": "tsc",
     "start": "electron .",
-    "dev": "tsc && copy-renderer && electron .",
+    "dev": "tsc && node scripts/copy-renderer.js && electron .",
     "package": "electron-builder",
-    "copy-renderer": "node -e \"const fs=require('fs'),path=require('path');fs.readdirSync('src/renderer').forEach(f=>fs.copyFileSync('src/renderer/'+f,'dist/renderer/'+f))\""
+    "copy-renderer": "node scripts/copy-renderer.js"
   },
   "build": {
     "appId": "com.markdownbiblegenerator.app",
     "productName": "Markdown Bible Generator",
     "win": {
       "target": "nsis"
+    },
+    "mac": {
+      "target": "dmg"
+    },
+    "linux": {
+      "target": "AppImage"
     },
     "files": [
       "dist/**/*",

@@ -12,7 +12,7 @@ Desktop app that downloads Bible translations from [bolls.life](https://bolls.li
 cd electron
 npm install
 npx tsc
-node -e "const fs=require('fs'),path=require('path');fs.readdirSync('src/renderer').forEach(f=>fs.copyFileSync('src/renderer/'+f,'dist/renderer/'+f))"
+node scripts/copy-renderer.js
 npx electron .
 ```
 
@@ -22,11 +22,14 @@ npx electron .
 cd electron
 npm install
 npx tsc
-node -e "const fs=require('fs'),path=require('path');fs.readdirSync('src/renderer').forEach(f=>fs.copyFileSync('src/renderer/'+f,'dist/renderer/'+f))"
+node scripts/copy-renderer.js
 npm run package
 ```
 
-Output: `dist/Markdown Bible Generator Setup 1.0.0.exe` (Windows NSIS installer).
+Outputs:
+- **Windows**: `dist/Markdown Bible Generator Setup 1.0.0.exe` (NSIS)
+- **macOS**: `dist/Markdown Bible Generator 1.0.0.dmg`
+- **Linux**: `dist/Markdown Bible Generator 1.0.0.AppImage`
 
 ## Key Architecture
 
@@ -47,6 +50,8 @@ electron/
       index.html             → UI layout (dropdowns, progress, output)
       styles.css             → Styling (dark theme)
       script.js              → IPC handlers, state management, UI logic
+  scripts/
+    copy-renderer.js         → Copies renderer files to dist/renderer/
   package.json
   tsconfig.json
   electron-builder.yml
@@ -91,4 +96,4 @@ electron/
 - **Plain HTML/CSS** (UI — no React/Vue overhead)
 - **JavaScript** (renderer — simple DOM manipulation)
 - **Node.js built-ins** (`https`, `fs`, `path`) + **cheerio 1.0.0-rc.12** (HTML stripping in main process)
-- **electron-builder** (packaging to .exe)
+- **electron-builder** (packaging to .exe/.dmg/.AppImage)

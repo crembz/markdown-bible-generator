@@ -9,9 +9,9 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-      "resolveJsonModule": true,
-      "skipDefaultLibCheck": true,
-      "types": [],
+    "resolveJsonModule": true,
+    "skipDefaultLibCheck": true,
+    "types": [],
     "declaration": false,
     "declarationMap": false,
     "sourceMap": false
