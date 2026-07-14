@@ -97,34 +97,6 @@ button:active {
   opacity: 0.6;
 }
 
-.book-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.book-item {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 8px;
-  background-color: #0f1628;
-  border-radius: 4px;
-}
-
-.book-item input[type="checkbox"] {
-  accent-color: #4a90d9;
-  cursor: pointer;
-}
-
-.book-item label {
-  font-size: 13px;
-  color: #c0c0d0;
-  cursor: pointer;
-  margin: 0;
-}
-
 .progress-section {
   margin-top: 20px;
   padding: 15px;

@@ -1,7 +1,7 @@
 import { app, BrowserWindow, ipcMain, dialog } from "electron";
 import * as path from "path";
 import { fetchTranslations } from "./api/client";
-import { downloadTranslation, deriveBooks, BibleVerse } from "./api/downloader";
+import { downloadTranslation, BibleVerse } from "./api/downloader";
 import { formatBible, OutputFormat } from "./formatter";
 import { writeOutput } from "./file-writer";
 
@@ -30,32 +30,15 @@ ipcMain.handle("translations:fetch", async () => {
   }
 });
 
-ipcMain.handle("bible:download", async (_event, slug: string, selectedBooks: number[]) => {
+ipcMain.handle("bible:download", async (_event, slug: string) => {
   const verses: BibleVerse[] = [];
-  let totalBooks = selectedBooks.length;
-  let currentBook = 0;
 
   try {
     const allData = await downloadTranslation(slug, (percent, status) => {
       mainWindow?.webContents.send("bible:progress", { percent, status });
     });
 
-    mainWindow?.webContents.send("bible:progress", { percent: 70, status: "Formatting output..." });
-
-    const books = deriveBooks(allData);
-    const bookMap = new Map(books.map((b) => [b.id, b]));
-    const filteredBooks = selectedBooks.filter((id) => bookMap.has(id));
-
-    for (const bookId of filteredBooks) {
-      const bookVerses = allData.filter((v) => v.book === bookId);
-      verses.push(...bookVerses);
-      currentBook++;
-      const bookProgress = 70 + (currentBook / totalBooks) * 20;
-      mainWindow?.webContents.send("bible:progress", {
-        percent: bookProgress,
-        status: `Processed ${bookId}: ${books.find((b) => b.id === bookId)?.name || "Unknown"} (${currentBook}/${totalBooks})`,
-      });
-    }
+    verses.push(...allData);
 
     mainWindow?.webContents.send("bible:progress", { percent: 95, status: "Writing files..." });
 
@@ -65,8 +48,8 @@ ipcMain.handle("bible:download", async (_event, slug: string, selectedBooks: num
   }
 });
 
-ipcMain.handle("file:save", async (_event, format: OutputFormat, verses: BibleVerse[], selectedBooks: number[], baseDir: string) => {
-  const { content, filePaths, fileContents } = formatBible(verses, format, selectedBooks);
+ipcMain.handle("file:save", async (_event, format: OutputFormat, verses: BibleVerse[], baseDir: string) => {
+  const { content, filePaths, fileContents } = formatBible(verses, format);
   const written = await writeOutput(content, filePaths, baseDir, fileContents);
   return { success: true, paths: written };
 });

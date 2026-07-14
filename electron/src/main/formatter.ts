@@ -19,13 +19,11 @@ interface BookResult {
 
 export function formatBible(
   verses: BibleVerse[],
-  format: OutputFormat,
-  selectedBooks?: number[]
+  format: OutputFormat
 ): { content: string; filePaths: string[]; fileContents: string[] } {
   const bookData: BookData = {};
 
   for (const verse of verses) {
-    if (selectedBooks && !selectedBooks.includes(verse.book)) continue;
 
     if (!bookData[verse.book]) {
       bookData[verse.book] = {};

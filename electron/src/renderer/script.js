@@ -21,11 +21,6 @@ const BOOK_NAMES = {
   85: "4_Maccabees", 86: "Psalm_152", 87: "Psalm_153", 88: "Psalm_154",
 };
 
-function getSelectedBooks() {
-  const checkboxes = document.querySelectorAll("#book-grid input[type='checkbox']:checked");
-  return Array.from(checkboxes).map((cb) => parseInt(cb.value, 10));
-}
-
 function htmlToMarkdown(html) {
   return html
     .replace(/<[^>]*>/g, "")
@@ -41,11 +36,10 @@ function htmlToMarkdown(html) {
     .trim();
 }
 
-function formatBible(verses, format, selectedBooks) {
+function formatBible(verses, format) {
   const bookData = {};
 
   for (const verse of verses) {
-    if (selectedBooks && !selectedBooks.includes(verse.book)) continue;
     if (!bookData[verse.book]) bookData[verse.book] = {};
     if (!bookData[verse.book][verse.chapter]) bookData[verse.book][verse.chapter] = [];
     const name = BOOK_NAMES[verse.book] || verse.book_name;
@@ -138,7 +132,7 @@ const progressFill = document.getElementById("progress-fill");
 const progressText = document.getElementById("progress-text");
 const resultSection = document.getElementById("result-section");
 const resultContent = document.getElementById("result-content");
-const bookGrid = document.getElementById("book-grid");
+
 
 async function fetchTranslations() {
   fetchBtn.disabled = true;
@@ -183,12 +177,11 @@ async function fetchTranslations() {
 }
 
 function updateDownloadButton() {
-  downloadBtn.disabled = !selectedTranslation || getSelectedBooks().length === 0;
+  downloadBtn.disabled = !selectedTranslation;
 }
 
 async function downloadBible() {
-  const books = getSelectedBooks();
-  if (!selectedTranslation || books.length === 0) return;
+  if (!selectedTranslation) return;
 
   progressSection.style.display = "block";
   resultSection.style.display = "none";
@@ -198,7 +191,7 @@ async function downloadBible() {
 
   downloadedVerses = [];
 
-  const result = await window.electronAPI.downloadBible(selectedTranslation, books);
+  const result = await window.electronAPI.downloadBible(selectedTranslation);
 
   if (!result.success) {
     progressText.textContent = "Error: " + result.error;
@@ -212,7 +205,7 @@ async function downloadBible() {
   downloadedFilePaths = [];
 
   const format = formatSelect.value;
-  const { content, filePaths } = formatBible(downloadedVerses, format, books);
+  const { content, filePaths } = formatBible(downloadedVerses, format);
   downloadedFilePaths = filePaths;
 
   progressFill.style.width = "100%";
@@ -237,7 +230,6 @@ async function saveFiles() {
     const result = await window.electronAPI.saveFiles(
       format,
       downloadedVerses,
-      getSelectedBooks(),
       dialog.path
     );
 
@@ -257,7 +249,7 @@ translationSelect.addEventListener("change", (e) => {
   selectedTranslation = e.target.value;
   updateDownloadButton();
 });
-bookGrid.addEventListener("change", updateDownloadButton);
+
 formatSelect.addEventListener("change", updateDownloadButton);
 
 function startApp() {
