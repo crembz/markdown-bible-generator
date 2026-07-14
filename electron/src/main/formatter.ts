@@ -19,7 +19,8 @@ interface BookResult {
 
 export function formatBible(
   verses: BibleVerse[],
-  format: OutputFormat
+  format: OutputFormat,
+  translationName?: string
 ): { content: string; filePaths: string[]; fileContents: string[] } {
   const bookData: BookData = {};
 
@@ -50,7 +51,11 @@ export function formatBible(
         content += bookData[bookId][chapterId].join("\n\n") + "\n\n";
       }
     }
-    filePaths.push("bible.md");
+    const slug = (translationName || "bible")
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "_")
+      .replace(/^_|_$/g, "");
+    filePaths.push(`${slug}.md`);
     return { content, filePaths, fileContents: [content] };
   }
 

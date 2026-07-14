@@ -42,14 +42,14 @@ ipcMain.handle("bible:download", async (_event, slug: string) => {
 
     mainWindow?.webContents.send("bible:progress", { percent: 95, status: "Writing files..." });
 
-    return { success: true, verses };
+    return { success: true, verses, translationName: slug };
   } catch (error) {
     return { success: false, error: (error as Error).message };
   }
 });
 
-ipcMain.handle("file:save", async (_event, format: OutputFormat, verses: BibleVerse[], baseDir: string) => {
-  const { content, filePaths, fileContents } = formatBible(verses, format);
+ipcMain.handle("file:save", async (_event, format: OutputFormat, verses: BibleVerse[], baseDir: string, translationName: string) => {
+  const { content, filePaths, fileContents } = formatBible(verses, format, translationName);
   const written = await writeOutput(content, filePaths, baseDir, fileContents);
   return { success: true, paths: written };
 });

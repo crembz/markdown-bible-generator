@@ -25,8 +25,8 @@ const api = {
   fetchTranslations: (): Promise<TranslationData> => ipcRenderer.invoke("translations:fetch"),
   downloadBible: (slug: string): Promise<TranslationData> =>
     ipcRenderer.invoke("bible:download", slug),
-  saveFiles: (format: string, verses: unknown[], baseDir: string): Promise<SaveResult> =>
-    ipcRenderer.invoke("file:save", format, verses, baseDir),
+  saveFiles: (format: string, verses: unknown[], baseDir: string, translationName: string): Promise<SaveResult> =>
+    ipcRenderer.invoke("file:save", format, verses, baseDir, translationName),
   showSaveDialog: (): Promise<DialogResult> => ipcRenderer.invoke("dialog:showSaveFolder"),
   onProgress: (cb: (data: ProgressData) => void): void =>
     ipcRenderer.on("bible:progress", (_event: unknown, data: ProgressData) => cb(data)),

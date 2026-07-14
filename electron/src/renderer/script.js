@@ -205,7 +205,7 @@ async function downloadBible() {
   downloadedFilePaths = [];
 
   const format = formatSelect.value;
-  const { content, filePaths } = formatBible(downloadedVerses, format);
+  const { content, filePaths } = formatBible(downloadedVerses, format, selectedTranslation);
   downloadedFilePaths = filePaths;
 
   progressFill.style.width = "100%";
@@ -230,7 +230,8 @@ async function saveFiles() {
     const result = await window.electronAPI.saveFiles(
       format,
       downloadedVerses,
-      dialog.path
+      dialog.path,
+      selectedTranslation
     );
 
     if (result.success) {
