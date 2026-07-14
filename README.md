@@ -11,7 +11,9 @@ Desktop app that downloads Bible translations from [bolls.life](https://bolls.li
 ```bash
 cd electron
 npm install
-npm run dev
+npx tsc
+node -e "const fs=require('fs'),path=require('path');fs.readdirSync('src/renderer').forEach(f=>fs.copyFileSync('src/renderer/'+f,'dist/renderer/'+f))"
+npx electron .
 ```
 
 ## Build Executable
@@ -19,12 +21,12 @@ npm run dev
 ```bash
 cd electron
 npm install
-npm run build
-npm run copy-renderer
+npx tsc
+node -e "const fs=require('fs'),path=require('path');fs.readdirSync('src/renderer').forEach(f=>fs.copyFileSync('src/renderer/'+f,'dist/renderer/'+f))"
 npm run package
 ```
 
-Output: `dist/BibleMarkdownGenerator-win-x64/BibleMarkdownGenerator.exe` (Windows).
+Output: `dist/Markdown Bible Generator Setup 1.0.0.exe` (Windows NSIS installer).
 
 ## Key Architecture
 
@@ -56,7 +58,7 @@ electron/
 |---------|-----------|---------|
 | `translations:fetch` | renderer → main | Fetch available translations from bolls.life |
 | `translations:response` | main → renderer | Emit translations list to UI |
-| `bible:download` | renderer → main | Start download for selected translation/books |
+| `bible:download` | renderer → main | Start download for selected translation (full) |
 | `bible:progress` | main → renderer | Progress updates (percent, status) |
 | `bible:complete` | main → renderer | Emit result (file paths or error) |
 | `file:save` | renderer → main | Save output to disk (dialog + write) |
@@ -77,9 +79,9 @@ electron/
   - Nested: `language → translations[] → {short_name, full_name, updated, dir}`
 - Full download: `https://bolls.life/static/translations/{slug}.json`
   - Flat array: `{book, book_name, chapter, verse, text}` (text is HTML)
-- `get-books/{slug}` endpoint returns 404 — book list is derived from the translation JSON by scanning `book` IDs and max `chapter` counts.
 - Book names are **hardcoded** in `src/main/books.ts`, NOT from the API.
 - Book IDs: 1-66 = Protestant canon, 67-88 = apocrypha/deuterocanonical (KJV has 89 books, ESV/NKJV have 66).
+- All translations are downloaded in full (no per-book filtering).
 
 ## Stack
 
