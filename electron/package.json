@@ -37,6 +37,7 @@
     "cheerio": "1.0.0-rc.12"
   },
   "allowScripts": {
-    "electron@28.3.3": true
+    "electron@28.3.3": true,
+    "electron-winstaller@5.4.0": true
   }
 }
