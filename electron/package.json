@@ -1,8 +1,12 @@
 {
   "name": "markdown-bible-generator",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Desktop app that downloads Bible translations from bolls.life and generates markdown output",
   "author": "crembz",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crembz/markdown-bible-generator.git"
+  },
   "main": "dist/main/main.js",
   "scripts": {
     "build": "tsc",
@@ -27,6 +31,12 @@
       "dist/**/*",
       "src/renderer/**/*"
     ]
+  },
+  "publish": {
+    "provider": "github",
+    "repo": "markdown-bible-generator",
+    "owner": "crembz",
+    "releaseType": "release"
   },
   "devDependencies": {
     "electron": "^28.3.3",
